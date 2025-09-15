@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Vending AI Mock</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="loadicon-con">
+    <img src="./assets/loading.png" alt="" id="loadingIcon">
+  </div>
+
+  <header>
+    <img src="./assets/logo.png" alt="#" id="logo">
+    <div class="ai-section">
+        <svg class="ai-logo" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256">
+<g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(4,4)"><path d="M26.22266,3.86914c-0.914,0 -1.828,0.50984 -2.25,1.52734l-2.27539,5.48242c-1.965,4.735 -5.62842,8.51459 -10.23242,10.55859l-5.99023,2.66016c-1.966,0.872 -1.966,3.73052 0,4.60352l6.18359,2.74609c4.488,1.992 8.08694,5.63584 10.08594,10.21484l2.24609,5.14648c0.54,1.23625 1.81195,1.69969 2.90039,1.39063c0.65306,-0.18544 1.24045,-0.64887 1.56445,-1.39062l2.24609,-5.14648c1.999,-4.579 5.59694,-8.22284 10.08594,-10.21484l6.18359,-2.74609c0.4915,-0.218 0.85972,-0.5585 1.10547,-0.96289c0.12288,-0.20219 0.21591,-0.42098 0.27734,-0.64648c0.06144,-0.2255 0.0918,-0.45812 0.0918,-0.69141c0,-0.23328 -0.03036,-0.46783 -0.0918,-0.69336c-0.18431,-0.6766 -0.64556,-1.282 -1.38281,-1.60937l-5.99023,-2.66016c-4.604,-2.044 -8.26742,-5.82359 -10.23242,-10.55859l-2.27539,-5.48242c-0.422,-1.0175 -1.336,-1.52734 -2.25,-1.52734zM49.75,39.64063c-0.49,0 -0.97908,0.27286 -1.20508,0.81836l-0.65039,1.56445c-1.107,2.67 -3.17158,4.80208 -5.76758,5.95508l-1.83789,0.81641c-1.052,0.467 -1.052,1.99684 0,2.46484l1.94531,0.86523c2.531,1.125 4.5615,3.17972 5.6875,5.76172l0.63086,1.44922c0.28937,0.6625 0.97112,0.90977 1.55469,0.74414c0.35014,-0.09938 0.66464,-0.34664 0.83789,-0.74414l0.63281,-1.44922c1.126,-2.582 3.15455,-4.63672 5.68555,-5.76172l1.94727,-0.86523c0.26325,-0.11675 0.46017,-0.2992 0.5918,-0.51562c0.06581,-0.10821 0.11553,-0.22503 0.14844,-0.3457c0.06581,-0.24136 0.06581,-0.49882 0,-0.74023c-0.06581,-0.24142 -0.19905,-0.4675 -0.39648,-0.64258c-0.09872,-0.08754 -0.21213,-0.1622 -0.34375,-0.2207l-1.83789,-0.81641c-0.9735,-0.43275 -1.87219,-1.00294 -2.67383,-1.6875c-0.26721,-0.22819 -0.52475,-0.46798 -0.76953,-0.7207c-0.73434,-0.75816 -1.3628,-1.62432 -1.86523,-2.57227c-0.16748,-0.31598 -0.32061,-0.64099 -0.45898,-0.97461l-0.65039,-1.56445c-0.226,-0.5455 -0.71508,-0.81836 -1.20508,-0.81836z"></path></g></g>
+</svg>
+        <input type="text" id="userInput" placeholder="กรอกชื่อเมนูที่ต้องการ และรายละเอียด">
+        <button id="sendToAI">ส่งไป AI</button>
+      </div>
+  </header>
+  <div class="space"></div>
+
+  <div class="main-container">
+    <nav class="category-menu">
+      <h3>ประเภทวัตถุดิบ</h3>
+      <ul id="categoryList"></ul>
+    </nav>
+
+    <main>
+
+      <div id="items-container" class="items-container"></div>
+
+      <footer>
+        <div class="footer-con">
+        <button id="resetBtn">รีเซ็ต</button>
+        <button id="manageBtn">จัดการวัตถุดิบ</button>
+
+        <button id="showCartBtn">สรุปรายการ (0 ชิ้น / 0 บาท)</button>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <h3>รายการวัตถุดิบ</h3>
+      <ul id="cartList"></ul>
+      <div class="total" id="cartTotal">รวม 0 บาท</div>
+      <div class="modal-footer">
+        <button id="closeCart">ปิด</button>
+        <button id="confirmPurchase">สั่งซื้อ</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="aiModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">AI แนะนำ</div>
+      <div id="aiResults"></div>
+      <div class="modal-footer">
+        <button id="closeModal">ยกเลิก</button>
+        <button id="confirmSelection">ตกลง</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="passwordModal" class="modal">
+  <div class="modal-content">
+    <h3>ใส่รหัสผ่าน</h3>
+    <input type="password" id="passwordInput" placeholder="รหัสผ่าน">
+    <div class="modal-footer">
+      <button id="closePasswordModal">ปิด</button>
+      <button id="confirmPassword">ตกลง</button>
+    </div>
+    <div id="manageForm" style="display:none;margin-top:20px;">
+  <h3>ฟอร์มจัดการสินค้า</h3>
+  <div class="form-container">
+  <input type="text" id="newItemName" placeholder="ชื่อสินค้า">
+  <input type="number" id="newItemPrice" placeholder="ราคา">
+  <input type="text" id="newItemCategory" placeholder="หมวดหมู่">
+  <input type="text" id="newItemImage" placeholder="URL รูปภาพ">
+  </div>
+  <div class="additem-con">
+    <button id="addItemBtn">เพิ่มสินค้า</button>
+  </div>
+  <hr>
+  <div id="existingItemsContainer"></div>
+   <hr>
+  <h4>ประวัติคำสั่งซื้อ</h4>
+  <button id="loadPurchasesBtn">โหลดคำสั่งซื้อ</button>
+  <div id="purchasesContainer" style="margin-top:10px;"></div>
+</div>
+    <div id="passwordError" style="color:red;margin-top:10px;"></div>
+  </div>
+</div>
+
+
+
+  <script type="module" src="scripts/api.js"></script>
+  <script type="module"src="scripts/dom.js"></script>
+  <script type="module"src="scripts/main.js"></script>
+  <script type="module"src="scripts/mock.js"></script>
+  <script type="module"src="scripts/render.js"></script>
+  <script type="module"src="scripts/service.js"></script>
+  <script type="module"src="scripts/manage.js"></script>
+
+  <div class="backwrap gradient">
+  <div class="back-shapes">
+
+      <!-- BG ELEMENT  -->
+      <span class="floating circle" style="top:66.59856996935649%;left:13.020833333333334%;animation-delay:-0.9s;"></span>
+      <span class="floating triangle" style="top:31.46067415730337%;left:33.59375%;animation-delay:-4.8s;"></span>
+      <span class="floating cross" style="top:76.50663942798774%;left:38.020833333333336%;animation-delay:-4s;"></span>
+      <span class="floating square" style="top:21.450459652706844%;left:14.0625%;animation-delay:-2.8s;"></span>
+      <span class="floating square" style="top:58.12053115423902%;left:56.770833333333336%;animation-delay:-2.15s;"></span>
+      <span class="floating square" style="top:8.682328907048008%;left:72.70833333333333%;animation-delay:-1.9s;"></span>
+      <span class="floating cross" style="top:31.3585291113381%;left:58.541666666666664%;animation-delay:-0.65s;"></span>
+      <span class="floating cross" style="top:69.96935648621042%;left:81.45833333333333%;animation-delay:-0.4s;"></span>
+      <span class="floating circle" style="top:15.117466802860061%;left:32.34375%;animation-delay:-4.1s;"></span>
+      <span class="floating circle" style="top:13.074565883554648%;left:45.989583333333336%;animation-delay:-3.65s;"></span>
+      <span class="floating cross" style="top:55.87334014300306%;left:27.135416666666668%;animation-delay:-2.25s;"></span>
+      <span class="floating cross" style="top:49.54034729315628%;left:53.75%;animation-delay:-2s;"></span>
+      <span class="floating cross" style="top:34.62717058222676%;left:49.635416666666664%;animation-delay:-1.55s;"></span>
+      <span class="floating cross" style="top:33.19713993871297%;left:86.14583333333333%;animation-delay:-0.95s;"></span>
+      <span class="floating square" style="top:28.19203268641471%;left:25.208333333333332%;animation-delay:-4.45s;"></span>
+      <span class="floating circle" style="top:39.7344228804903%;left:10.833333333333334%;animation-delay:-3.35s;"></span>
+      <span class="floating triangle" style="top:77.83452502553627%;left:24.427083333333332%;animation-delay:-2.3s;"></span>
+      <span class="floating triangle" style="top:2.860061287027579%;left:47.864583333333336%;animation-delay:-1.75s;"></span>
+      <span class="floating triangle" style="top:71.3993871297242%;left:66.45833333333333%;animation-delay:-1.25s;"></span>
+      <span class="floating triangle" style="top:31.256384065372828%;left:76.92708333333333%;animation-delay:-0.65s;"></span>
+      <span class="floating triangle" style="top:46.47599591419816%;left:38.90625%;animation-delay:-0.35s;"></span>
+      <span class="floating cross" style="top:3.4729315628192032%;left:19.635416666666668%;animation-delay:-4.3s;"></span>
+      <span class="floating cross" style="top:3.575076608784474%;left:6.25%;animation-delay:-4.05s;"></span>
+      <span class="floating cross" style="top:77.3237997957099%;left:4.583333333333333%;animation-delay:-3.75s;"></span>
+      <span class="floating cross" style="top:0.9193054136874361%;left:71.14583333333333%;animation-delay:-3.3s;"></span>
+      <span class="floating square" style="top:23.6976506639428%;left:63.28125%;animation-delay:-2.1s;"></span>
+      <span class="floating square" style="top:81.30745658835546%;left:45.15625%;animation-delay:-1.75s;"></span>
+      <span class="floating square" style="top:60.9805924412666%;left:42.239583333333336%;animation-delay:-1.45s;"></span>
+      <span class="floating square" style="top:29.009193054136876%;left:93.90625%;animation-delay:-1.05s;"></span>
+      <span class="floating square" style="top:52.093973442288046%;left:68.90625%;animation-delay:-0.7s;"></span>
+      <span class="floating square" style="top:81.51174668028601%;left:83.59375%;animation-delay:-0.35s;"></span>
+      <span class="floating square" style="top:11.542390194075587%;left:91.51041666666667%;animation-delay:-0.1s;"></span>
+  </div>
+</div>
+
+</body>
+</html>
