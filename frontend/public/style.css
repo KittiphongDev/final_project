@@ -606,6 +606,10 @@ footer button:hover{
     align-items: center;
   }
 
+  main{
+    width: 100vw;
+  }
+
   .ai-section input[type=text] {
     width: 70%;
     margin-bottom: 0.5rem;
@@ -615,32 +619,71 @@ footer button:hover{
     width: 30%;
   }
 
+  #existingItemsContainer div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  #existingItemsContainer div div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #existingItemsContainer div div button{
+    width: 100%;
+    text-align: center;
+    padding: 1rem 2rem;
+    margin: .2rem;
+  }
+
+  .form-container{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .form-container div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .items-container {
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     gap: 1rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    margin-top: .5vh;
   }
 
-  footer {
+  .modal-footer button{
+    min-width: 50px;
+  }
+
+  .item-card h3{
+    font-size: 15px;
+  }
+
+  .footer-con {
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    padding: 1vh;
   }
 
   footer button {
-    margin: 0.5rem 0;
+    margin: 0 .2rem;
   }
 }
 
 @media (min-width: 375px) and (max-width: 768px){
 
-  header{
-    width: 100vw;
+  html{
+    overflow: hidden;
   }
 
-  .main-container{
-    left: 2;
+  header{
+    flex-direction: column;
+    width: 100vw;
   }
 
   .ai-section{
@@ -657,13 +700,16 @@ footer button:hover{
   }
 
   #sendToAI{
+    
     margin: 1rem 1rem;
-    padding: 5px 5px;
-    font-size: 13px;
+    padding: 5px 10px;
+    font-size: 10px;
+    white-space: nowrap;
   }
   
   #logo{
     height: 10vh;;
+    object-fit: contain;
   }
 
   .space{
@@ -709,20 +755,28 @@ footer button:hover{
     font-size: 10px;
   }
 
+  main{
+    width: 100vw;
+    padding: 5rem 0;
+    margin: 0;
+  }
+
   .main-container{
     display: flex;
     width: 100vw;
     justify-content: center ;
     align-items: center;
-    margin: 0;
     overflow-x: hidden; 
+    margin: 0;
+    padding: 0;
   }
 
   .items-container{
-    grid-template: repeat(2,14rem);
+    grid-template-columns: repeat(2, 10rem);
     width: 100vw;
-    height: 70vh;
-    margin-left: .5rem;
+    height: 65vh;
+    padding: 0;
+    justify-content: center;
   }
 
   .item-card h3{
@@ -738,6 +792,11 @@ footer button:hover{
     margin-bottom: 1rem;
   }
 
+  footer{
+    justify-content: center;
+    padding: 4vh;
+  }
+
   .footer-con{
     display: flex;
     justify-content: space-between;
@@ -748,6 +807,7 @@ footer button:hover{
   .footer-con button{
     font-size: 10px;
     margin: .2rem;
+    white-space: nowrap;
   }
   
   .modal-content button{

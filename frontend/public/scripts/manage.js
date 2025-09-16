@@ -67,12 +67,18 @@ async function loadExistingItems() {
       const div = document.createElement("div");
 
       div.innerHTML = `
+      <div>
         <input type="text" value="${i.name}" class="nameInput" />
         <input type="number" value="${i.price}" class="priceInput" />
+      </div>
+      <div>
         <input type="text" value="${i.category}" class="categoryInput" />
         <input type="text" value="${i.image}" class="imageInput" />
+      </div>
+      <div>
         <button class="editItemBtn" data-id="${i.id}">แก้ไข</button>
         <button class="deleteItemBtn" data-id="${i.id}">ลบ</button>
+      </div>
       `;
 
       existingItemsContainer.appendChild(div);
