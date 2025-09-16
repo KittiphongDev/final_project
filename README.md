@@ -14,6 +14,8 @@ git clone https://github.com/KittiphongDev/final_project.git
 
 ## Run the Project
 
+### disclaimer : If you can't run backend it's because .env
+
 For starting the website:
 
 1. Open folder in vscode.
