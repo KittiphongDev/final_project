@@ -352,6 +352,7 @@ footer button:hover {
 }
 
 #existingItemsContainer div button {
+  width: 100%;
   margin: 0 1rem;
   padding: .2rem 1.5rem;
 }
@@ -612,13 +613,13 @@ i .modal-content button:hover {
 
 }
 
-@media (min-width: 1440px) and (max-width: 1600px) {
+/* @media (min-width: 1440px) and (max-width: 1600px) {
 
   .items-container {
     grid-template-columns: repeat(5, 14rem);
   }
 
-}
+} */
 
 @media (min-width: 768px) and (max-width: 1200px) {
   header {
@@ -837,6 +838,9 @@ i .modal-content button:hover {
   .modal-content button {
     min-width: 50px;
   }
+  .modal-content{
+    padding: 5vh;
+  }
 
   .form-container {
     display: flex;
@@ -846,4 +850,52 @@ i .modal-content button:hover {
   #cartList li input {
     margin: 0;
   }
+
+  #existingItemsContainer{
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  #existingItemsContainer div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  #existingItemsContainer div div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  #existingItemsContainer div div button {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 2rem;
+    margin: .2rem;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-container div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #loadPurchasesBtn,#addItemBtn{
+    width: 100%;
+  }
+
 }
