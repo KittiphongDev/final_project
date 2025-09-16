@@ -210,7 +210,8 @@ main {
   height: 92%;
   display: grid;
   margin-top: -2vh;
-  grid-template-columns: repeat(5, 14rem);
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  grid-auto-rows: 1fr;
   overflow-y: auto;
   overflow: scroll;
   gap: 2rem;
@@ -230,6 +231,7 @@ main {
 }
 
 .item-card {
+  height: 100%;
   border-radius: 12px;
   padding: 1rem;
   text-align: center;
@@ -577,15 +579,16 @@ i .modal-content button:hover {
 
 /* Responsive */
 
-@media (min-width: 2500px) {
+@media (min-width: 1200px) {
 
   body {
     overflow: hidden;
   }
 
   .items-container {
-    width: calc(100vw - 160px);
-    grid-template-columns: repeat(9, 14rem);
+    width: 87vw;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-auto-rows: 1fr;
   }
 
   header {
@@ -594,8 +597,12 @@ i .modal-content button:hover {
     align-items: center;
   }
 
+  .space{
+    height: 20vh;
+  }
+
   .ai-section {
-    transform: scale(1.5);
+    transform: scale(1.2);
   }
 
   .ai-section input[type=text] {
@@ -603,7 +610,7 @@ i .modal-content button:hover {
   }
 
   .ai-section button {
-    width: 5%;
+    width: 10%;
   }
 
   #logo {
@@ -632,13 +639,17 @@ i .modal-content button:hover {
     width: 100vw;
   }
 
+  .space{
+    height: 20vh;
+  }
+
   .ai-section input[type=text] {
     width: 70%;
-    margin-bottom: 0.5rem;
   }
 
   .ai-section button {
     width: 30%;
+    max-width: 10rem;
   }
 
   #existingItemsContainer div {
@@ -673,6 +684,7 @@ i .modal-content button:hover {
 
   .items-container {
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-auto-rows: 1fr;
     gap: 1rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -714,7 +726,7 @@ i .modal-content button:hover {
   }
 
   .ai-logo {
-    width: 20%;
+    width: 10%;
   }
 
   #userInput {
@@ -732,26 +744,31 @@ i .modal-content button:hover {
 
   #logo {
     height: 10vh;
-    ;
     object-fit: contain;
   }
 
   .space {
-    height: 20vh;
+    height: 13vh;
   }
 
   .ai-section>* {
-    transform: scale(1.2);
-    margin: 0 3rem;
+    transform: scale(1.1);
+    margin: 0;
+  }
+
+  .ai-section button{
+    max-width: 5rem;
+    margin: 2rem;
   }
 
   .category-menu {
-    flex-direction: row;
-    height: auto;
+    display: none;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 95vw;
     padding: 0;
+    margin: 0;
     overflow-x: auto;
   }
 
@@ -780,9 +797,12 @@ i .modal-content button:hover {
   }
 
   main {
+    display: flex ;
     width: 100vw;
     padding: 5rem 0;
     margin: 0;
+    justify-content: center;
+    align-items: center;
   }
 
   .main-container {
@@ -793,14 +813,17 @@ i .modal-content button:hover {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    flex-direction: column;
   }
 
   .items-container {
-    grid-template-columns: repeat(2, 10rem);
-    width: 100vw;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    grid-auto-rows: 1fr;
+    width: 90vw;
     height: 65vh;
     padding: 0;
     justify-content: center;
+    justify-self: center;
   }
 
   .item-card h3 {
@@ -824,6 +847,7 @@ i .modal-content button:hover {
 
   .footer-con {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
@@ -831,7 +855,7 @@ i .modal-content button:hover {
 
   .footer-con button {
     font-size: 10px;
-    margin: .2rem;
+    margin: .4rem;
     white-space: nowrap;
   }
 

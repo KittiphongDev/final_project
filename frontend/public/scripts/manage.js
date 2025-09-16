@@ -74,7 +74,7 @@ async function loadExistingItems() {
     const items = await getItem();
     items.forEach((i) => {
       const div = document.createElement("div");
-
+      div.classList.add("itemContainer");
       div.innerHTML = `
       <div>
         <input type="text" value="${i.name}" class="nameInput" />
@@ -110,10 +110,10 @@ async function loadExistingItems() {
     document.querySelectorAll(".editItemBtn").forEach((btn) => {
       btn.addEventListener("click", async (e) => {
         const id = e.target.dataset.id;
-        const parentDiv = e.target.parentElement;
-        const name = parentDiv.querySelector(".nameInput").value;
-        const price = parentDiv.querySelector(".priceInput").value;
-        const category = parentDiv.querySelector(".categoryInput").value;
+        const itemDiv = e.target.closest(".itemContainer");
+        const name = itemDiv.querySelector(".nameInput").value;
+        const price = itemDiv.querySelector(".priceInput").value;
+        const category = itemDiv.querySelector(".categoryInput").value;
 
         const res = await updateItem(
           id,
