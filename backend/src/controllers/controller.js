@@ -9,12 +9,12 @@ export const getItems = async (req, res) => {
     const items = await Item.find();
 
     // แปลง _id => id และเลือกเฉพาะ field ที่ต้องการ
-    const formatted = items.map(i => ({
+    const formatted = items.map((i) => ({
       id: i._id.toString(), // แปลง ObjectId เป็น string
       name: i.name,
       price: i.price,
       category: i.category,
-      image: i.image
+      image: i.image,
     }));
 
     res.json(formatted);
@@ -23,11 +23,11 @@ export const getItems = async (req, res) => {
   }
 };
 
-
 export const addItem = async (req, res) => {
   try {
     const { name, price, category, image } = req.body;
-    if (!name || !price) return res.status(400).json({ error: "Name & price required" });
+    if (!name || !price)
+      return res.status(400).json({ error: "Name & price required" });
 
     const newItem = new Item({ name, price, category, image });
     await newItem.save();
@@ -108,11 +108,11 @@ export const getPurchases = async (req, res) => {
     const purchases = await Purchase.find().sort({ createdAt: -1 });
 
     // map ข้อมูล snapshot ของ item ใน purchase
-    const result = purchases.map(p => ({
+    const result = purchases.map((p) => ({
       id: p._id,
       createdAt: p.createdAt,
-      items: p.items.map(i => ({
-        id: i.itemId,      // ObjectId ของสินค้า (snapshot)
+      items: p.items.map((i) => ({
+        id: i.itemId, // ObjectId ของสินค้า (snapshot)
         name: i.name,
         price: i.price,
         category: i.category,
@@ -137,18 +137,19 @@ export const llmSuggest = async (req, res) => {
     if (!userPrompt || !userPrompt.trim()) {
       return res.json({
         ingredients: [],
-        comment: "ขออภัย ข้อมูลไม่ถูกต้องหรือไม่ได้ระบุชื่ออาหารที่สามารถประมวลผลได้"
+        comment:
+          "ขออภัย ข้อมูลไม่ถูกต้องหรือไม่ได้ระบุชื่ออาหารที่สามารถประมวลผลได้",
       });
     }
 
     const allItems = await Item.find(); // ดึงรายการวัตถุดิบทั้งหมด
-    const availableItems = allItems.map(i => ({
+    const availableItems = allItems.map((i) => ({
       id: i._id.toString(),
       name: i.name,
-      price: i.price
+      price: i.price,
     }));
 
-const finalPrompt = `
+    const finalPrompt = `
 You are given a list of available ingredients (availableItems) with their IDs, names, and prices.
 
 A user has requested a recipe or menu in natural, possibly messy, casual text (request).
@@ -170,17 +171,13 @@ Request: ${userPrompt}
 AvailableItems: ${JSON.stringify(availableItems)}
 `;
 
-
-
-
-
     const ai = new GoogleGenAI({});
 
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: finalPrompt,
       config: {
-        thinkingConfig: { thinkingBudget: 0 } // ปิด thinking เพื่อความเร็ว
+        thinkingConfig: { thinkingBudget: 0 }, // ปิด thinking เพื่อความเร็ว
       },
     });
 
@@ -188,17 +185,18 @@ AvailableItems: ${JSON.stringify(availableItems)}
 
     let result = { ingredients: [], comment: "" };
     try {
-      const cleaned = generatedText.replace(/```(json)?\n?/g, "").replace(/```/g, "").trim();
+      const cleaned = generatedText
+        .replace(/```(json)?\n?/g, "")
+        .replace(/```/g, "")
+        .trim();
       result = JSON.parse(cleaned);
     } catch (e) {
       result = generatedText;
     }
 
     res.json(result);
-
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: err.message });
   }
 };
-

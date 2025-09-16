@@ -18,7 +18,7 @@ export async function addItem(item, password) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-password": password
+        "x-password": password,
       },
       body: JSON.stringify(item),
     });
@@ -36,7 +36,7 @@ export async function updateItem(id, item, password) {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "x-password": password
+        "x-password": password,
       },
       body: JSON.stringify(item),
     });
@@ -49,14 +49,13 @@ export async function updateItem(id, item, password) {
   }
 }
 
-
 export async function removeItem(id, password) {
   try {
     const response = await fetch(`${API_BASE}/items/${id}`, {
       method: "DELETE",
       headers: {
-        "x-password": password
-      }
+        "x-password": password,
+      },
     });
     if (!response.ok) throw new Error("Failed to delete item");
     return await response.json();
@@ -90,7 +89,7 @@ export async function getPurchases(password) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "x-password": password
+        "x-password": password,
       },
     });
 
@@ -103,7 +102,6 @@ export async function getPurchases(password) {
   }
 }
 
-
 // ---------- LLM ----------
 // api.js
 export async function llm(prompt) {
@@ -111,20 +109,18 @@ export async function llm(prompt) {
     const response = await fetch(`${API_BASE}/llm`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt })
+      body: JSON.stringify({ prompt }),
     });
 
     if (!response.ok) throw new Error("Failed to call LLM API");
 
     const data = await response.json();
     return data;
-
   } catch (err) {
     console.error(err);
     return { ingredients: [], comment: "เกิดข้อผิดพลาดในการเรียก AI" };
   }
 }
-
 
 // ---------- PASSWORD ----------
 export async function checkPassword(password) {
@@ -132,7 +128,7 @@ export async function checkPassword(password) {
     const response = await fetch(`${API_BASE}/check-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password })
+      body: JSON.stringify({ password }),
     });
     if (!response.ok) throw new Error("Failed to check password");
     return await response.json(); // { valid: true/false }

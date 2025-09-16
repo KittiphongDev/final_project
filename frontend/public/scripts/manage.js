@@ -1,4 +1,11 @@
-import { getItem, addItem, updateItem, removeItem, checkPassword, getPurchases } from "./api.js";
+import {
+  getItem,
+  addItem,
+  updateItem,
+  removeItem,
+  checkPassword,
+  getPurchases,
+} from "./api.js";
 
 // DOM
 const manageBtn = document.getElementById("manageBtn");
@@ -10,7 +17,9 @@ const passwordError = document.getElementById("passwordError");
 
 const manageForm = document.getElementById("manageForm");
 const addItemBtn = document.getElementById("addItemBtn");
-const existingItemsContainer = document.getElementById("existingItemsContainer");
+const existingItemsContainer = document.getElementById(
+  "existingItemsContainer"
+);
 const newItemName = document.getElementById("newItemName");
 const newItemPrice = document.getElementById("newItemPrice");
 const newItemCategory = document.getElementById("newItemCategory");
@@ -37,9 +46,9 @@ closePasswordModal.addEventListener("click", () => {
 // ----------------- ตรวจสอบรหัสผ่าน -----------------
 confirmPassword.addEventListener("click", async () => {
   const pwd = passwordInput.value.trim();
-  if (!pwd) { 
-    passwordError.textContent = "กรุณากรอกรหัสผ่าน"; 
-    return; 
+  if (!pwd) {
+    passwordError.textContent = "กรุณากรอกรหัสผ่าน";
+    return;
   }
 
   try {
@@ -63,7 +72,7 @@ async function loadExistingItems() {
   existingItemsContainer.innerHTML = "";
   try {
     const items = await getItem();
-    items.forEach(i => {
+    items.forEach((i) => {
       const div = document.createElement("div");
 
       div.innerHTML = `
@@ -85,8 +94,8 @@ async function loadExistingItems() {
     });
 
     // เพิ่ม event ลบ
-    document.querySelectorAll(".deleteItemBtn").forEach(btn => {
-      btn.addEventListener("click", async e => {
+    document.querySelectorAll(".deleteItemBtn").forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
         const id = e.target.dataset.id;
         const res = await removeItem(id, savedPassword);
         if (res && res.status === "ok") {
@@ -98,16 +107,20 @@ async function loadExistingItems() {
     });
 
     // เพิ่ม event แก้ไข
-    document.querySelectorAll(".editItemBtn").forEach(btn => {
-      btn.addEventListener("click", async e => {
+    document.querySelectorAll(".editItemBtn").forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
         const id = e.target.dataset.id;
         const parentDiv = e.target.parentElement;
         const name = parentDiv.querySelector(".nameInput").value;
         const price = parentDiv.querySelector(".priceInput").value;
         const category = parentDiv.querySelector(".categoryInput").value;
 
-        const res = await updateItem(id, { name, price, category }, savedPassword);
-        console.log(res)
+        const res = await updateItem(
+          id,
+          { name, price, category },
+          savedPassword
+        );
+        console.log(res);
         if (res) {
           alert("อัปเดตเรียบร้อยแล้ว");
           loadExistingItems();
@@ -116,12 +129,10 @@ async function loadExistingItems() {
         }
       });
     });
-
   } catch (err) {
     console.error(err);
   }
 }
-
 
 // ----------------- เพิ่มสินค้า -----------------
 addItemBtn.addEventListener("click", async () => {
@@ -130,9 +141,9 @@ addItemBtn.addEventListener("click", async () => {
   const category = newItemCategory.value.trim();
   const image = newItemImage.value.trim();
 
-  if (!name || !price) { 
-    alert("กรอกชื่อและราคาให้ครบ"); 
-    return; 
+  if (!name || !price) {
+    alert("กรอกชื่อและราคาให้ครบ");
+    return;
   }
 
   try {
@@ -176,13 +187,15 @@ loadPurchasesBtn.addEventListener("click", async () => {
   `;
   table.appendChild(header);
 
-  purchases.forEach(p => {
+  purchases.forEach((p) => {
     const row = document.createElement("tr");
     const total = p.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-    const itemsText = p.items.map(i => `${i.name} x${i.quantity}`).join(", ");
+    const itemsText = p.items.map((i) => `${i.name} x${i.quantity}`).join(", ");
 
     row.innerHTML = `
-      <td style="border:1px solid #ccc;padding:4px">${new Date(p.createdAt).toLocaleString()}</td>
+      <td style="border:1px solid #ccc;padding:4px">${new Date(
+        p.createdAt
+      ).toLocaleString()}</td>
       <td style="border:1px solid #ccc;padding:4px">${itemsText}</td>
       <td style="border:1px solid #ccc;padding:4px">${total} บาท</td>
     `;

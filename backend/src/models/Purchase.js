@@ -7,12 +7,11 @@ const purchaseSchema = new mongoose.Schema({
       price: Number,
       category: String,
       image: String,
-      quantity: Number
-    }
+      quantity: Number,
+    },
   ],
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
 });
-
 
 const Purchase = mongoose.model("Purchase", purchaseSchema);
 

@@ -1,6 +1,17 @@
 import express from "express";
-import { getItems, addItem,updateItem , deleteItem, addPurchase, getPurchases, llmSuggest } from "../controllers/controller.js";
-import { checkPassword, authMiddleware } from "../controllers/authController.js";
+import {
+  getItems,
+  addItem,
+  updateItem,
+  deleteItem,
+  addPurchase,
+  getPurchases,
+  llmSuggest,
+} from "../controllers/controller.js";
+import {
+  checkPassword,
+  authMiddleware,
+} from "../controllers/authController.js";
 
 const router = express.Router();
 
